@@ -68,3 +68,12 @@ delete
 delete employee
 delete team
 delete employee assignment
+
+# 5. install some dependencies 
+npm init
+npm install cors express pg -s 
+npm i touch-cli -g
+npm i nodemon -g
+
+# 6. create data using postman - post using
+http://localhost:5000/employee

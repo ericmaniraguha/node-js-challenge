@@ -1,0 +1,30 @@
+{
+  "name": "employee_management_service",
+  "version": "1.0.0",
+  "description": "employee_management_service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericmaniraguha/nodejs-API.git"
+  },
+  "keywords": [
+    "nodejs",
+    "swagger",
+    "express",
+    "postgres"
+  ],
+  "author": "Eric Maniraguha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ericmaniraguha/nodejs-API/issues"
+  },
+  "homepage": "https://github.com/ericmaniraguha/nodejs-API#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "pg": "^8.7.3"
+  }
+}

@@ -25,7 +25,7 @@ create sequence employee_assignment_seq increment 1 start 1;
 create table employee(
    id integer NOT NULL DEFAULT nextval('employee_seq'),
    name varchar(50) NOT NULL,
-   date_of_joinig timestamp NOT NULL,
+   date_of_joining timestamp NOT NULL,
    designation varchar(25),
    gender varchar(10),
    email varchar (50),

@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const pool = require('./db');
+const pool = require('./src/db');
 
 app.use(express.json());
 
@@ -94,6 +94,98 @@ app.get('/employee/:id', async (req, res) =>{
         }
         res.json(data);
     } catch (error) {
+        res.status(500).json(error);
+    }
+})
+
+// update employee
+app.put("/employee/:id",async(req, res) =>{
+    try {
+        const {id}=req.params;
+        const {name,date_of_joining,designation, gender, email,bio}=req.body;
+        const employeeData=await pool.query("UPDATE EMPLOYEE SET name=$1, date_of_joining=$2, designation=$3, gender=$4, email=$5, bio=$6 where id= $7 returning *",
+            [name,date_of_joining,designation, gender, email,bio,id])
+        res.json(employeeData.rows[0]);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+})
+
+// update team
+app.put("/team/:id",async(req, res) =>{
+    try {
+        const {id}=req.params;
+        const {name,email,description}=req.body;
+        const teamData=await pool.query("UPDATE TEAM SET name=$1, email=$2, description=$3 where id= $4 returning *",
+            [name,email,description,id])
+        res.json(teamData.rows[0]);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+})
+
+
+// delete employee
+app.delete("/employee/:id", async(req, res) =>{
+    try{
+       const {id} = req.params;
+       let data = {};
+       const employeeAssignmentData =  await pool.query("DELETE from Employee_Assignment where employee_id=$1 returning *",[id]);
+       const employeeData = await pool.query("DELETE FROM employee WHERE id=$1 returning *",[id]);
+       data = employeeData.rows[0];
+
+       if(data){
+           data.teams = employeeAssignmentData.rows;
+
+       }else{
+           data ={
+               info:"Data not found, nothing to delete from employee"
+           }
+       }
+       res.json(data);
+
+    }catch(error){
+        res.status(500).json(error);
+    }
+})
+
+
+// delete team
+app.delete("/team/:id", async(req, res) =>{
+    try{
+       const {id} = req.params;
+       let data = {};
+       const employeeAssignmentData =  await pool.query("DELETE from Employee_Assignment where employee_id=$1 returning *",[id]);
+       const teamData = await pool.query("DELETE FROM team WHERE id=$1 returning *",[id]);
+       data = teamData.rows[0];
+
+       if(data){
+           data.employees = employeeAssignmentData.rows;
+
+       }else{
+           data ={
+               info:"Data not found, nothing to delete from team"
+           }
+       }
+       res.json(data);
+
+    }catch(error){
+        res.status(500).json(error);
+    }
+})
+
+
+// delete employees
+app.delete("/employeeassignment/:employee_id/:team_id", async(req, res) =>{
+    try{
+       const {employee_id, team_id} = req.params;
+       let data = {};
+       const employeeAssignmentData =  await pool.query("DELETE from Employee_Assignment where team_id=$1 and employee_id=$2 returning *",[employee_id, team_id]);
+      
+       console.log(employeeAssignmentData);
+       res.json(employeeAssignmentData.rows[0]);
+
+    }catch(error){
         res.status(500).json(error);
     }
 })

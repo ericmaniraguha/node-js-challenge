@@ -77,3 +77,6 @@ npm i nodemon -g
 
 # 6. create data using postman - post using
 http://localhost:5000/employee
+
+# 7. Create swagger documentation and run it using 
+http://localhost:5000/api-docs/employee

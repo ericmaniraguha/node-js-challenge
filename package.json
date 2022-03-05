@@ -1,0 +1,23 @@
+{
+  "name": "sendgrid-and-nodejs",
+  "version": "1.0.0",
+  "description": "send email using sendgrid(Twilio)and nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericmaniraguha/nodejs-API.git"
+  },
+  "author": "ericmaniraguha@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ericmaniraguha/nodejs-API/issues"
+  },
+  "homepage": "https://github.com/ericmaniraguha/nodejs-API#readme",
+  "dependencies": {
+    "@sendgrid/mail": "^7.6.1",
+    "dotenv": "^16.0.0"
+  }
+}
